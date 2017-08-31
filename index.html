@@ -1,28 +1,44 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Mini Word Processor</title>
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-  </head>
-  <body>
-    <p id="paragraph">Lorem ipsum cats are cute we are at work, blah blah blah blah. Stuff and things, mostly stuff but also things. I don't know what I'm doing for lunch today. Wooooo.
-    </p>
-    <div class="changeText">
-    <button class="changeStyle" id="b">bold</button>
-    <button class="changeStyle" id="i">italics</button>
-    <button class="changeStyle" id="u">underline</button>
-    <button id="edit">edit text</button>
-    <button id="color">color</button>
-    <div id="colorPalette">
-      <input class="colorSquare" type="button"/>
-      <input class="colorSquare" type="button"/>
-      <input class="colorSquare" type="button"/>
-      <input class="colorSquare" type="button"/>
-      <input class="colorSquare" type="button"/>
+
+<head>
+  <meta charset="utf-8">
+  <title>Mini Word Processor</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+</head>
+
+<body>
+  <ul>
+    <li>
+      <span class="paragraphHeader">Entry 1</span>
+      <p class="paragraphContents">Lorem ipsum cats are cute we are at work, blah blah blah blah. Stuff and things, mostly stuff but also things. I don't know what I'm doing for lunch today. Wooooo.
+      </p>
+    </li>
+    <li>
+      <span class="paragraphHeader">Entry 2</span>
+      <p class="paragraphContents">Lorem ipsum cats are cute we are at work, blah blah blah blah. Stuff and things, mostly stuff but also things. I don't know what I'm doing for lunch today. Wooooo.
+      </p>
+    </li>
+    <li>
+      <span class="paragraphHeader">Entry 1</span>
+      <p class="paragraphContents">Lorem ipsum cats are cute we are at work, blah blah blah blah. Stuff and things, mostly stuff but also things. I don't know what I'm doing for lunch today. Wooooo.
+      </p>
+      <div class="changeText">
+        <button class="changeStyle" id="b">bold</button>
+        <button class="changeStyle" id="i">italics</button>
+        <button class="changeStyle" id="u">underline</button>
+        <button id="edit">edit text</button>
+        <button id="color">color</button>
+        <div id="colorPalette">
+          <input class="colorSquare" type="button" />
+          <input class="colorSquare" type="button" />
+          <input class="colorSquare" type="button" />
+          <input class="colorSquare" type="button" />
+          <input class="colorSquare" type="button" />
+        </div>
       </div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-    <script src="app.js"></script>
-  </body>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+      <script src="app.js"></script>
+</body>
+
 </html>
