@@ -3,7 +3,9 @@ $('body').css({'width': '80%', 'margin': '5% auto', 'font-family': 'Lato'});
 
 $('ul').css('list-style', 'none');
 
-$('p').append('<div class="editMode">edit mode</div> <button class="doneEditing">done editing</button>');
+$('.changeText').append('<div class="editMode">edit mode</div> <button class="doneEditing">done editing</button> <span class="timeStamp"> </span>');
+
+$('.timeStamp').css({'font-size': '.25em', 'margin-top': '2%', 'display': 'block'});
 
 $('.paragraphContents, .doneEditing, .changeText:not(.edit)').css('display', 'none');
 
@@ -27,6 +29,9 @@ $('.paragraphHeader').click(function revealP(e) {
   e.preventDefault();
 });
 
+let date = new Date();
+let time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+
 //When the edit button is clicked, remove button and reveal styling buttons instead
 $('.edit').click(function(){
   $(this).closest('.paragraphContents').attr('contenteditable', 'true');
@@ -45,11 +50,13 @@ $('.edit').click(function(){
     selectedText.addRange(range);
 
   });
+});
 
-  //When the user is done editing, they can click the 'done editing button' to close the styling tools
-  $('.doneEditing').click(function(){
-    $('.changeText, .edit, .editMode, .doneEditing').toggle();
-  })
+//When the user is done editing, they can click the 'done editing button' to close the styling tools
+$('.doneEditing').click(function(){
+  // $('.changeText, .edit, .editMode, .doneEditing').toggle();
+  $('.timeStamp').empty().append('Last edited at'  + time + ' on '+ date);
+  $('.changeText, .edit, .editMode, .doneEditing').toggle();
 });
 
 //Array for color style options
