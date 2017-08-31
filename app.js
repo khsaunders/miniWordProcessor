@@ -1,20 +1,32 @@
 //general styling
-$('body').css({'border': 'solid,red,2px', 'width': '80%', 'margin': '5% auto', 'font-family': 'Lato'});
+$('body').css({'width': '80%', 'margin': '5% auto', 'font-family': 'Lato'});
 $('ul').css('list-style', 'none');
 $('.paragraphContents').css('display', 'none');
 $('.paragraphHeader').mouseover(function() {
   $(this).css('cursor', 'pointer');
 });
-$('#colorPalette').css('display', 'none');
+$('.changeText:not(.edit)').css('display','none');
 
-//toggle paragraph view
-$('.paragraphHeader').click(function revealP(e) {
-  $(this).next("p.paragraphContents").toggle();
-  e.preventDefault();
-})
+//append an edit button to each entry
+$('.edit').appendTo('p');
+
+$('p').append('<div class="editMode">edit mode</div>');
+$('.editMode').css({'display':'none', 'margin':'5% auto 0 auto'});
 
 //add changeText buttons to each paragraph
 $('.paragraphContents').after($('.changeText'));
+
+//toggle paragraph view
+$('.paragraphHeader').click(function revealP(e) {
+  $(this).next('p.paragraphContents').toggle();
+  e.preventDefault();
+});
+
+$('.edit').on('click', function(){
+  $(this).closest('.paragraphContents').attr('contenteditable', 'true');
+  $(this).toggle();
+  $('.editMode').toggle();
+});
 
 //array for color style options
 const colors = ['#4CAF50', '#FD4F29', '#1B75E2', '#E2821B', '#643BBB'];
@@ -39,9 +51,6 @@ $('#color').on('click', function changeColor() {
 
 //function for changing text to bold, italic, etc.
 
-// $('p, .changeText').each(function() {
-//   $(this).wrapAll('<div class="mainContainer"/>');
-// });
 
 $('.changeStyle').click(function textAlter() {
   let name = ($(this).attr('id'));
