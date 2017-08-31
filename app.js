@@ -1,4 +1,4 @@
-//general styling
+//General styling
 $('body').css({'width': '80%', 'margin': '5% auto', 'font-family': 'Lato'});
 $('ul').css('list-style', 'none');
 $('.paragraphContents').css('display', 'none');
@@ -7,28 +7,29 @@ $('.paragraphHeader').mouseover(function() {
 });
 $('.changeText:not(.edit)').css('display','none');
 
-//append an edit button to each entry
+//Append an edit button and a div that tells the user when the paragraph is in edit mode to each entry
 $('.edit').appendTo('p');
 
 $('p').append('<div class="editMode">edit mode</div>');
 $('.editMode').css({'display':'none', 'margin':'5% auto 0 auto'});
 
-//add changeText buttons to each paragraph
-$('.paragraphContents').after($('.changeText'));
+//Add changeText buttons to each paragraph
+$('.paragraphContents').append($('.changeText'));
 
-//toggle paragraph view
+//Toggle paragraph view
 $('.paragraphHeader').click(function revealP(e) {
   $(this).next('p.paragraphContents').toggle();
   e.preventDefault();
 });
 
+//When the edit button is clicked, remove button and reveal styling buttons instead
 $('.edit').on('click', function(){
   $(this).closest('.paragraphContents').attr('contenteditable', 'true');
   $(this).toggle();
-  $('.editMode').toggle();
+  $('.editMode, .changeText').toggle();
 });
 
-//array for color style options
+//Array for color style options
 const colors = ['#4CAF50', '#FD4F29', '#1B75E2', '#E2821B', '#643BBB'];
 
 let colorSquares = $('.colorSquare');
@@ -37,21 +38,18 @@ let i = 0;
 colorSquares.each(function() {
   $(this).css('background-color', colors[i]);
   i = (i + 1) % colors.length;
-  /* ^ honestly, i don't know why this works.
-    we're reassigning i to be the remainder of itself plus one divided by the length of the array. i don't see how it relates; i'll have to dig deeper. this was just a gem found on stackoverflow */
+  /* ^ Honestly, I don't know why this works.
+    We're reassigning i to be the remainder of itself plus one divided by the length of the array. I don't see how it relates; I'll have to dig deeper. This was just a gem found on Stack Overflow */
 });
 
-//default state for text color palette
+//Color palette is normally hidden until the 'color' button is clicked
 $('#colorPalette').css('display', 'none');
 
-//toggle to reveal and close color palette
 $('#color').on('click', function changeColor() {
   $('#colorPalette').toggle();
 });
 
-//function for changing text to bold, italic, etc.
-
-
+//Function for changing text to bold, italic, etc.
 $('.changeStyle').click(function textAlter() {
   let name = ($(this).attr('id'));
   let selectedText = window.getSelection();
