@@ -1,17 +1,22 @@
 //General styling
 $('body').css({'width': '80%', 'margin': '5% auto', 'font-family': 'Lato'});
+
 $('ul').css('list-style', 'none');
-$('.paragraphContents').css('display', 'none');
+
+$('p').append('<div class="editMode">edit mode</div> <button class="doneEditing">done editing</button>');
+
+$('.paragraphContents, .doneEditing, .changeText:not(.edit)').css('display', 'none');
+
 $('.paragraphHeader').mouseover(function() {
   $(this).css('cursor', 'pointer');
 });
-$('.changeText:not(.edit)').css('display','none');
+// $('.changeText:not(.edit)').css('display','none');
 
 //Append an edit button and a div that tells the user when the paragraph is in edit mode to each entry
 $('.edit').appendTo('p');
 
-$('p').append('<div class="editMode">edit mode</div>');
 $('.editMode').css({'display':'none', 'margin':'5% auto 0 auto'});
+
 
 //Add changeText buttons to each paragraph
 $('.paragraphContents').append($('.changeText'));
@@ -23,11 +28,11 @@ $('.paragraphHeader').click(function revealP(e) {
 });
 
 //When the edit button is clicked, remove button and reveal styling buttons instead
-$('.edit').on('click', function(){
+$('.edit').click(function(){
   $(this).closest('.paragraphContents').attr('contenteditable', 'true');
-  $('.changeStyle').attr('contenteditable', 'false');
+  $('.changeStyle, .editMode, .doneEditing').attr('contenteditable', 'false');
   $(this).toggle();
-  $('.editMode, .changeText').toggle();
+  $('.editMode, .changeText, .doneEditing').toggle();
 
   //Edit button reveals change style buttons then allows changes to be made
   $('.changeStyle').click(function textAlter() {
@@ -40,6 +45,11 @@ $('.edit').on('click', function(){
     selectedText.addRange(range);
 
   });
+
+  //When the user is done editing, they can click the 'done editing button' to close the styling tools
+  $('.doneEditing').click(function(){
+    $('.changeText, .edit, .editMode, .doneEditing').toggle();
+  })
 });
 
 //Array for color style options
