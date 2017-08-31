@@ -25,8 +25,21 @@ $('.paragraphHeader').click(function revealP(e) {
 //When the edit button is clicked, remove button and reveal styling buttons instead
 $('.edit').on('click', function(){
   $(this).closest('.paragraphContents').attr('contenteditable', 'true');
+  $('.changeStyle').attr('contenteditable', 'false');
   $(this).toggle();
   $('.editMode, .changeText').toggle();
+
+  //Edit button reveals change style buttons then allows changes to be made
+  $('.changeStyle').click(function textAlter() {
+    let name = ($(this).attr('id'));
+    let selectedText = window.getSelection();
+    let range = selectedText.getRangeAt(0).cloneRange();
+    let tag = document.createElement(name);
+
+    range.surroundContents(tag);
+    selectedText.addRange(range);
+
+  });
 });
 
 //Array for color style options
@@ -48,29 +61,3 @@ $('#colorPalette').css('display', 'none');
 $('#color').on('click', function changeColor() {
   $('#colorPalette').toggle();
 });
-
-//Function for changing text to bold, italic, etc.
-$('.changeStyle').click(function textAlter() {
-  let name = ($(this).attr('id'));
-  let selectedText = window.getSelection();
-  let range = selectedText.getRangeAt(0).cloneRange();
-  let tag = document.createElement(name);
-
-  range.surroundContents(tag);
-  selectedText.addRange(range);
-
-});
-
-//COLOR PALETTE ON HOLD
-
-//   if ($('.mainContainer .colorPalette').click) {
-//     function changeTheColor() {
-//       console.log('color click!');
-//       //will produce the rgb value of the color
-//       let desiredColor = $(this).css('background-color');
-//       //have to change it to string in order for css to recognize it
-//       let colorVal = desiredColor.toString();
-//       $(range).css('color', colorVal);
-//     }
-//   }
-// });
